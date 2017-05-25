@@ -1,14 +1,11 @@
 import java.util.ArrayList;
 
 
-class Hamma <T> implements Comparable {
+class Hamma <T extends Comparable<T>> implements Comparable<T> {
 
     ArrayList<T> items = new ArrayList<T>();
     ArrayList<T> deletedItems = new ArrayList<T>();
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
+
     public void add(T item)
     {
         if(!items.contains(item)) items.add(item);
@@ -30,6 +27,7 @@ class Hamma <T> implements Comparable {
         else {
             if(remove) {
                 last = items.get(items.size());
+                deletedItems.add(last);
                 items.remove(items.size());
             }
         }
@@ -47,9 +45,35 @@ class Hamma <T> implements Comparable {
             for (Integer i : index) if (i < min) min = i;
             if (remove){
                 first = items.get(min);
+                deletedItems.add(first);
                 items.remove(min);
             }
         }
         return first;
+    }
+    public T[] getLess (T element , boolean remove){
+
+        ArrayList <T> less = new ArrayList<T>();
+        for (T item:items)
+        {
+            if(item.compareTo(element) == -1) less.add(item);
+        }
+        if(remove)
+        {
+            for (T item : less)
+            {
+                deletedItems.add(item);
+            }
+            for (int i = 0 ; i<less.size() ;i++)
+            {
+                items.remove(less.get(i));
+            }
+        }
+        return (T[]) less.toArray();
+    }
+
+    @Override
+    public int compareTo(T o) {
+        return 0;
     }
 }
