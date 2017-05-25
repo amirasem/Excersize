@@ -5,6 +5,10 @@ class Hamma <T extends Comparable<T>> implements Comparable<T> {
 
     ArrayList<T> items = new ArrayList<T>();
     ArrayList<T> deletedItems = new ArrayList<T>();
+    @Override
+    public int compareTo(T o) {
+        return 0;
+    }
 
     public void add(T item)
     {
@@ -71,9 +75,15 @@ class Hamma <T extends Comparable<T>> implements Comparable<T> {
         }
         return (T[]) less.toArray();
     }
-
-    @Override
-    public int compareTo(T o) {
-        return 0;
+    public T[] getRecentlyRemoved(int n)
+    {
+        ArrayList<T> removed = new ArrayList<T>();
+        for (int i =items.size() ; i>=n ;i--)
+        {
+            removed.add(items.get(i));
+        }
+        return (T[]) removed.toArray();
     }
+
+
 }
