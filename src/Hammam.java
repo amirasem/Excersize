@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 
 
-class Hamma <T extends Comparable<T>> implements Comparable<T> {
+ public class Hammam<T extends Comparable<T>> implements Comparable<T> {
 
     ArrayList<T> items = new ArrayList<T>();
     ArrayList<T> deletedItems = new ArrayList<T>();
     @Override
     public int compareTo(T o) {
-        return 0;
+        //TODO : overriding compareTo method
+     return 0;
     }
 
     public void add(T item)
@@ -20,7 +21,7 @@ class Hamma <T extends Comparable<T>> implements Comparable<T> {
         else {
             for (T item : items) {
                 if (min == null) min = item;
-                if (compareTo(item) == 1) min = item;
+                if (item.compareTo(item) == 1) min = item;
             }
         }
         return min;
