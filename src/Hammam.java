@@ -13,8 +13,10 @@ import java.util.ArrayList;
 
     public void add(T item)
     {
-        if(!items.contains(item)) items.add(item);
+        System.out.println("Enter to add....");
+        if(!items.contains(item) && item!=null) items.add(item);
     }
+
     public T getMin() throws IllegalStateException {
         T min = null;
         if(items.isEmpty()) throw new IllegalStateException();
@@ -31,9 +33,9 @@ import java.util.ArrayList;
         if(items.isEmpty()) throw new IllegalStateException();
         else {
             if(remove) {
-                last = items.get(items.size());
+                last = items.get(items.size()-1);
                 deletedItems.add(last);
-                items.remove(items.size());
+                items.remove(items.size()-1);
             }
         }
         return last;
@@ -79,12 +81,35 @@ import java.util.ArrayList;
     public T[] getRecentlyRemoved(int n)
     {
         ArrayList<T> removed = new ArrayList<T>();
-        for (int i =items.size() ; i>=n ;i--)
+        for (int i =deletedItems.size()-1 ; i>n ;i--)
         {
-            removed.add(items.get(i));
+            removed.add(deletedItems.get(i));
         }
         return (T[]) removed.toArray();
     }
+
+     public ArrayList<T> getItems() {
+         return items;
+     }
+
+     public ArrayList<T> getDeletedItems() {
+         return deletedItems;
+     }
+
+     public static void main(String[] args) {
+         Hammam<Integer> hammam = new Hammam<>();
+         hammam.add(12345);
+         hammam.add(0000);
+         hammam.add(1111);
+         ArrayList<Integer> numbers = new ArrayList<>();
+         numbers = hammam.getItems();
+         Integer p = hammam.getLast(true);
+         ArrayList<Integer> integers = new ArrayList<>();
+         Integer [] integers1 = new Integer[5];
+         integers1 = hammam.getRecentlyRemoved(0);
+         //int out  = hammam.getFirst(false);
+         System.out.println(numbers + "...................." + p + "\n "  + integers1);
+     }
 
 
 }
