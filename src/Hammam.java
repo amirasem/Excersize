@@ -85,7 +85,12 @@ import java.util.ArrayList;
         {
             removed.add(deletedItems.get(i));
         }
-        return (T[]) removed.toArray();
+        T[] remove2 = (T[])removed.toArray();
+        for (int i = 0  ; i<removed.size() ;  i++)
+        {
+            remove2[i] = removed.get(i);
+        }
+        return remove2;
     }
 
      public ArrayList<T> getItems() {
